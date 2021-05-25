@@ -8,6 +8,8 @@ const pharmacyRoutes = require("./route/pharmacyRoute");
 const productRoutes = require("./route/productRoute");
 const cors = require("cors");
 
+const port = process.env.PORT || 4000;
+
 require("./Config/dbConnect");
 
 const app = express();
@@ -17,7 +19,7 @@ app.use(cors());
 app.use("/buyer", buyerRoutes);
 app.use("/admin", adminRoutes);
 app.use("/pharmacy", pharmacyRoutes);
-app.use("/product", productRoutes);
+app.use("/products", productRoutes);
 
 // catch all routes not on the server
 app.all("*", (req, res, next) => {
@@ -31,4 +33,5 @@ app.use((error, req, res, next) => {
   res.status(error.status || 500).json({ message: error.message });
 });
 
-app.listen(4000, () => console.log("Server up and running"));
+app.listen(port, () => console.log("Server up and running"));
+5000;

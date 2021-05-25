@@ -1,12 +1,15 @@
 import "./App.css";
-import Header from "./Header";
-import Home from "./Home";
+import Header from "./pages/Header";
+import Home from "./pages/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Checkout from "./Checkout";
-import Login from "./Login";
-import Payment from "./Payment";
-import MyUserContext from "./MyUserContext";
+import Checkout from "./pages/Checkout";
+import Login from "./pages/Login";
+import Payment from "./pages/Payment";
+import MyUserContext from "./context/MyUserContext";
 import { useState } from "react";
+import Pharmacy from "./Pharmacy/Pharmacy";
+import PharmaLogin from "./pages/PharmaLogin";
+import PharmacyRoute from "./routes/PharmacyRoute";
 
 function App() {
   const [authedUser, setAuthedUser] = useState(false);
@@ -20,6 +23,14 @@ function App() {
               <Login />
             </Route>
 
+            <Route path="/pharmacy-login">
+              <PharmaLogin />
+            </Route>
+
+            <PharmacyRoute path="/pharmacy">
+              <Pharmacy />
+            </PharmacyRoute>
+
             <div>
               <Header
                 signStatus={authedUser ? "Sign Out" : "Sign In"}
@@ -28,12 +39,12 @@ function App() {
               <Route path="/payment">
                 <Payment />
               </Route>
+
               <Route path="/checkout">
-                {/* <Header /> */}
                 <Checkout />
               </Route>
+
               <Route exact path="/">
-                {/* <Header /> */}
                 <Home />
               </Route>
             </div>

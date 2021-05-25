@@ -1,0 +1,150 @@
+.header {
+  height: 100px;
+  display: Flex;
+  align-items: center;
+  background-color: gold;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header__pic {
+  width: 100px;
+  height: 60%;
+  object-fit: contain;
+  margin: 0 20px;
+  /* margin-top: 10px; */
+}
+.header_search {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  border-radius: 24px;
+}
+.header_option {
+  cursor: pointer;
+}
+.header_searchInput {
+  height: 12px;
+  padding: 10px;
+  border: none;
+  width: 100%;
+}
+
+.header_searchIcon {
+  padding: 5px;
+  height: 22px;
+  background-color: green;
+}
+
+.hearder_L1 {
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.dropdown {
+  display: block;
+  position: relative;
+  text-align: center;
+}
+
+.dropdown.active > ul {
+  display: block;
+}
+
+.dropdown > ul {
+  position: absolute;
+  display: none;
+  right: -2;
+  margin: 0;
+  padding: 20px;
+  list-style: none;
+  background-color: gold;
+}
+
+.dropdown > ul li {
+  display: block;
+  text-align: center;
+  width: 100%;
+  color: black;
+}
+
+.hearder_L2 {
+  font-size: 30px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.header_basket {
+  display: flex;
+  flex-direction: column;
+}
+
+.header_count {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.header_nav {
+  display: flex;
+  justify-content: space-evenly;
+  width: 40%;
+}
+
+.header_option {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.header_basket {
+  width: fit-content;
+}
+.header_basket > *,
+.header_nav > * {
+  text-decoration: none;
+  width: 100%;
+  /* text-align: left; */
+  color: black;
+  /* margin-right: 30px; */
+}
+
+.dropdown.active li:hover {
+  background-color: rgb(226, 209, 110);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.hearder_L2 {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.header_basket {
+  display: flex;
+  flex-direction: column;
+}
+
+.header_count {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.header_nav {
+  display: flex;
+  justify-content: space-evenly;
+  width: 40%;
+}
+
+.header_option {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.header_basket > *,
+.header_nav > * {
+  text-decoration: none;
+  color: black;
+}

@@ -1,7 +1,14 @@
 const Pharmacy = require("../model/Pharmacy");
 const Product = require("../model/Product");
+const {
+  updateProductValidator,
+  createProductValidator,
+} = require("../utils/validation");
+// const { upload } = require("../utils/cloudinary");
+const {} = require("../utils/file-uploads");
+const multer = require("multer");
 
-const getAllProducts = async (req, res) => {
+exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
     res.status(200).json({ products });
@@ -10,7 +17,16 @@ const getAllProducts = async (req, res) => {
   }
 };
 
-const getProduct = async (req, res) => {
+exports.getProductsByPharmacy = async (req, res) => {
+  try {
+    const products = await Product.find({ pharmacyId: req.admin });
+    res.status(200).json({ products });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.getProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const product = await Product.findById(id);
@@ -23,58 +39,88 @@ const getProduct = async (req, res) => {
   }
 };
 
-const createProduct = async (req, res) => {
+exports.createProduct = async (req, res) => {
+  // console.log(req.body);
   try {
-    const { title, image, price, description, quantity } = req.body;
-    if (!title || !image || !price || !description || !quantity) {
-      res.status(400).send({ message: "Please enter all fields" });
-      return;
-    }
-    const existProduct = await Pharmacy.findOne({ title });
-    if (existProduct) {
-      res.status(400).send({ message: "Product  already exist" });
-      return;
-    }
+    // validate the input
+    // const result = await createProductValidator.validateAsync(req.body);
+    // console.log(result);
 
+    // get the pharmacy
+    const pharmacy = await Pharmacy.findById(req.admin);
+
+    // check if pharmacy exists
+    if (!pharmacy) {
+      throw new Error("Pharmacy does not exists.");
+    }
+    console.log(req.body);
+    // create the product
     const product = await Product.create({
-      title,
-      image,
-      price,
-      description,
-      quantity,
+      pharmacyId: req.admin,
+      ...req.body,
     });
-    res.status(201).send({ pharmacy });
+
+    // add product to the pharmacy
+    pharmacy.products.push(product._id);
+    await pharmacy.save();
+
+    res.status(201).send({ product });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.log(error);
+    // res.status(500).json({ error: error.message });
   }
 };
 
-const updateProduct = async (req, res) => {
+exports.updateProduct = async (req, res) => {
+  console.log(req.body);
   try {
-    const { id } = req.params;
-    const product = await Product.findByIdAndUpdate(id, req.body, {
+    const result = await updateProductValidator.validateAsync(req.body);
+    let product = await Product.findById(req.params.id);
+    const pharmacy = await Pharmacy.findById(req.admin);
+
+    if (!product) {
+      throw new Error("Product does not exists.");
+    }
+
+    // check if pharmacy exists
+    if (!pharmacy) {
+      throw new Error("Pharmacy does not exists.");
+    }
+
+    if (!product.pharmacyId.equals(pharmacy._id)) {
+      throw new Error("You are not permitted to perform this operation.");
+    }
+
+    product = await Product.findByIdAndUpdate(id, result, {
       new: true,
     });
-    res.status(500).json({ product });
+    res.status(200).json({ product });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-const deleteProduct = async (req, res) => {
+exports.deleteProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-    await Product.findByIdAndDelete(id);
+    const product = await Product.findById(req.params.id);
+    const pharmacy = await Pharmacy.findById(req.admin);
+
+    // check if product exists
+    if (!product) {
+      throw new Error("Product does not exists.");
+    }
+
+    // check if pharmacy exists
+    if (!pharmacy) {
+      throw new Error("Pharmacy does not exists.");
+    }
+
+    if (!product.pharmacyId.equals(pharmacy._id)) {
+      throw new Error("You are not permitted to perform this operation.");
+    }
+    await Product.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-};
-
-module.exports = {
-  getAllProducts,
-  getProduct,
-  createProduct,
-  updateProduct,
-  deleteProduct,
 };

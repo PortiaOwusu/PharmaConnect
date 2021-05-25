@@ -4,7 +4,7 @@ import logosvg from "./logosvg.svg";
 import { Link } from "react-router-dom";
 import "./Pstyles.scss";
 import { useContext } from "react";
-import MyUserContext from "../MyUserContext";
+import MyUserContext from "../context/MyUserContext";
 
 const fetchQuery = async ({ uri, method = "GET", body = null }) => {
   const response = await fetch(uri, {
@@ -22,7 +22,7 @@ const Bregister = () => {
   const initValue = { fullName: "", email: "", password: "" };
   const [user, setUser] = useState(initValue);
   const [users, setUsers] = useState([]);
-  const { authedUser, setAuthedUser } = useContext(MyUserContext);
+  const { /* authedUser,*/ setAuthedUser } = useContext(MyUserContext);
 
   const history = useHistory();
 
@@ -73,12 +73,12 @@ const Bregister = () => {
         </div>
         <div className="form">
           <div className="form-group">
-            <label htmlFor="fullname">Fullname</label>
+            <label htmlFor="fullname">username</label>
             <input
               type="text"
               name="fullName"
               value={user.fullName}
-              placeholder="Fullname"
+              placeholder="username"
               onChange={handleChange}
             />
           </div>

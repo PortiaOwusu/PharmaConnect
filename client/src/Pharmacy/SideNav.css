@@ -1,0 +1,63 @@
+.sidenav {
+  width: 20vw;
+  background-color: /*#2f4252*/ black;
+  height: 100%;
+  padding: 0 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 80vh;
+  border-radius: 0px 30px 30px 0px;
+  position: fixed;
+  transition: 2s ease-in-out;
+}
+.sidenav.gotoggle {
+  width: 60px;
+}
+.sidenavitem {
+  transition: 3s ease-in-out;
+}
+
+.sidenav.gotoggle .sidenavitem {
+  opacity: 0;
+}
+
+.hamburger {
+  width: 50px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+.bar,
+.bar::before,
+.bar::after {
+  width: 100%;
+  height: 8px;
+  background-color: whitesmoke;
+  content: "";
+  display: block;
+}
+
+.bar::after,
+.bar::before {
+  position: absolute;
+}
+
+.bar::after {
+  bottom: 0;
+}
+
+.bar::before {
+  top: 0;
+}
+
+/* .sidearrow {
+  width: 50px;
+  height: 80px;
+} */

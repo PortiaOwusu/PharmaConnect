@@ -1,0 +1,15 @@
+.sidenavitem {
+  /* display: block; */
+  width: 15vw;
+  margin: auto;
+  list-style: none;
+  padding: 5px;
+  border-radius: 20px;
+  font-size: 30px;
+  font-weight: 800;
+  background-color: brown;
+  text-align: center;
+}
+a {
+  text-decoration: none;
+}

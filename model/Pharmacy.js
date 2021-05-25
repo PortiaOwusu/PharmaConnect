@@ -22,6 +22,17 @@ const pharmacySchema = new Schema(
       type: String,
       required: [true, "Please provide your location"],
     },
+    // role: {
+    //   type: String,
+    //   enum: "ADMIN",
+    //   default: "USER",
+    // },
+    products: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Products",
+      },
+    ],
   },
 
   { timestamps: true },

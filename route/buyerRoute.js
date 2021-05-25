@@ -12,6 +12,6 @@ router
 
 router.route("/registeruser").post(buyerAuthController.signup);
 
-router.route("/userlogin").post(buyerAuthController.signin);
+router.route("/login").post(buyerAuthController.signin);
 
 module.exports = router;

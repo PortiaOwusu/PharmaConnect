@@ -1,0 +1,37 @@
+.medicine {
+  position: relative;
+  background-color: #ea9a72;
+  border-radius: 10px;
+}
+
+.medicine > h2 {
+  text-align: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+.radioinput > input {
+  height: 1.5rem;
+}
+.radioinput {
+  font-size: 1.2rem;
+}
+
+.prescription {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+}
+
+.medicine > form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30vw;
+
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}

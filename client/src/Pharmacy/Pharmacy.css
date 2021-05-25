@@ -1,0 +1,21 @@
+.pharmacy {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  background-color: black;
+  min-height: 100vh;
+  position: relative;
+}
+
+.pharmacycontent {
+  width: 80vw;
+  overflow-x: hidden;
+  transition: 2s ease-in-out;
+  position: sticky;
+  margin-left: 20vw;
+}
+
+.fullPharma .pharmacycontent {
+  width: 95vw;
+  margin-left: 80px;
+}

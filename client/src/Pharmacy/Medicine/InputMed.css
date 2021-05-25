@@ -1,0 +1,27 @@
+.inputmed > input {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  border: none;
+}
+
+.inputmed > input:focus {
+  outline: none;
+  box-shadow: 0px 0px 12px 0.8px gold;
+}
+
+.inputmed {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.inputmed > input[type="checkbox"] {
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.inputmed > div {
+  margin-right: 7px;
+}

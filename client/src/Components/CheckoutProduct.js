@@ -1,16 +1,16 @@
 import React from "react";
 import "./CheckoutProduct.css";
-import { useStateValue } from "./StateProvider";
+import { useStateValue } from "../context/StateProvider";
 
 function CheckoutProduct({ id, image, title, price, rating }) {
-    const [{ cart }, dispatch] = useStateValue();
+  const [/*{ cart },*/ dispatch] = useStateValue();
 
-const removeFromCart = () => {
-dispatch({
-    type: "REMOVE_FROM_CART",
-    id: id,
-})
-}
+  const removeFromCart = () => {
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      id: id,
+    });
+  };
 
   return (
     <div className="checkoutProduct">

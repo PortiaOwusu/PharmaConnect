@@ -3,7 +3,13 @@ import "./Carousel.css";
 
 export default function ({ classc }) {
   return (
-    <Carousel className={`carousel ${classc}`} autoPlay infiniteLoop>
+    <Carousel
+      className={`carousel ${classc}`}
+      autoPlay
+      interval={3500}
+      transitionTime={1500}
+      infiniteLoop
+    >
       <div>
         <img src="/pic6.png" alt="" />
         <p></p>

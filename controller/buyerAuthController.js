@@ -2,11 +2,7 @@ const Buyer = require("../model/Buyer");
 const httpErrors = require("http-errors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const {
-  registerValidator,
-  loginvalidator,
-  loginValidator,
-} = require("../utils/validation");
+const { registerValidator, loginValidator } = require("../utils/validation");
 
 const signup = async (req, res) => {
   // const { fullName, email, password } = req.body;
@@ -30,7 +26,11 @@ const signup = async (req, res) => {
   // hash the password
   const hashedPassword = await bcrypt.hash(password, 12);
 
-  const buyer = await Buyer.create({ fullName, email, password });
+  const buyer = await Buyer.create({
+    fullName,
+    email,
+    password: hashedPassword,
+  });
   res.status(201).send({ buyer });
 };
 
@@ -42,12 +42,11 @@ const signin = async (req, res) => {
   // }
 
   const result = await loginValidator.validateAsync(req.body);
-  const { email, password } = result;
+  const { fullName, password } = result;
 
-  const existBuyer = await Buyer.findOne({ email });
+  const existBuyer = await Buyer.findOne({ fullName });
   if (!existBuyer) {
-    res.status(400).send({ message: "Invalid Credentials" });
-    return;
+    return res.status(400).send({ message: "Invalid Credentials" });
   }
 
   const buyer = existBuyer;
@@ -55,8 +54,7 @@ const signin = async (req, res) => {
 
   const isMatch = await bcrypt.compare(password, buyer.password);
   if (!isMatch) {
-    res.status(400).json({ message: "Invalid Credentials" });
-    return;
+    return res.status(400).json({ message: "Invalid Credentials" });
   }
 
   //  generate token

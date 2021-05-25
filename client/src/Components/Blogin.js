@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import logosvg from "./logosvg.svg";
 import { Link } from "react-router-dom";
-import MyUserContext from "../MyUserContext";
+import MyUserContext from "../context/MyUserContext";
 
 import "./Pstyles.scss";
 
@@ -23,7 +23,7 @@ const Blogin = () => {
   const [user, setUser] = useState(initValue);
   const [users, setUsers] = useState();
   const history = useHistory();
-  const { authedUser, setAuthedUser } = useContext(MyUserContext);
+  const { /* authedUser,*/ setAuthedUser } = useContext(MyUserContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +45,7 @@ const Blogin = () => {
 
     if (user.fullName && user.password) {
       await fetchQuery({
-        uri: "http://localhost:4000/buyer/userlogin",
+        uri: "http://localhost:4000/buyer/login",
         method: "POST",
         body: user,
       });
@@ -77,12 +77,12 @@ const Blogin = () => {
         </div>
         <div className="form">
           <div className="form-group">
-            <label htmlFor="fullname">Fullname</label>
+            <label htmlFor="fullname">username</label>
             <input
               type="text"
               value={user.fullName}
               name="fullName"
-              placeholder="Fullname"
+              placeholder="username"
               onChange={handleChange}
             />
           </div>

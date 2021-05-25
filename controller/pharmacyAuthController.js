@@ -3,9 +3,8 @@ const httpErrors = require("http-errors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const {
-  registerValidator,
-  loginvalidator,
-  loginValidator,
+  pharmacyRegisterValidator,
+  pharmacyLoginValidator,
 } = require("../utils/validation");
 
 const signup = async (req, res) => {
@@ -28,14 +27,9 @@ const signup = async (req, res) => {
   //  }
 
   //  check if all fields are avilable
-  const result = await registerValidator.validateAsync(req.body);
-  const {
-    pharmacyName,
-    email,
-    password,
-    registrationNumber,
-    location,
-  } = result;
+  const result = await pharmacyRegisterValidator.validateAsync(req.body);
+  const { pharmacyName, email, password, registrationNumber, location, role } =
+    result;
 
   //  check if email already exist in database
   const existPharmacy = await Pharmacy.findOne({ registrationNumber });
@@ -54,6 +48,7 @@ const signup = async (req, res) => {
     password: hashedPassword,
     registrationNumber,
     location,
+    role,
   });
   res.status(201).send({ pharmacy });
 };
@@ -65,8 +60,8 @@ const signin = async (req, res) => {
   //   return;
   // }
 
-  const result = await loginValidator.validateAsync(req.body);
-  const { pharmacyName, email, password, registrationNumber } = result;
+  const result = await pharmacyLoginValidator.validateAsync(req.body);
+  const { pharmacyName, password, registrationNumber } = result;
 
   const existPharmacy = await Pharmacy.findOne({ registrationNumber });
   if (!existPharmacy) {
@@ -88,7 +83,7 @@ const signin = async (req, res) => {
   const token = jwt.sign({ id: pharmacy._id }, "secrete", {
     expiresIn: "3hr",
   });
-  res.status(200).json({ token });
+  res.status(200).json({ token, pharmacy });
 };
 
 const verifyToken = (req, res, next) => {

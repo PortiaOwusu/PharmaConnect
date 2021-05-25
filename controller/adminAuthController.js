@@ -75,7 +75,7 @@ const verifyToken = (req, res, next) => {
   token = token.split(" ")[1];
   if (token) {
     const decodedToken = jwt.verify(token, "secrete");
-    req.Admin = decodedToken.id;
+    req.admin = decodedToken.id;
     next();
   } else {
     res.status(403).json({ message: "Unauthorized" });

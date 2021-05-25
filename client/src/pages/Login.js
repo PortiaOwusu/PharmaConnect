@@ -1,8 +1,8 @@
 import React from "react";
 import "./Login.scss";
 
-import Blogin from "./Components/Blogin";
-import Bregister from "./Components/Bregister";
+import Blogin from "../Components/Blogin";
+import Bregister from "../Components/Bregister";
 
 class Login extends React.Component {
   constructor(props) {

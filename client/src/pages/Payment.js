@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { Link } from "react-router-dom";
-import CheckoutProduct from "./CheckoutProduct";
+import CheckoutProduct from "../Components/CheckoutProduct";
 import "./Payment.css";
-import { useStateValue } from "./StateProvider";
-import { getCartTotal } from "./reducer";
+import { useStateValue } from "../context/StateProvider";
+import { getCartTotal } from "../reducer/reducer";
 
 function Payment() {
-  const [{ cart }, user, dispatch] = useStateValue();
-  const [succeeded, setSucceeded] = useState(false);
-  const [processing, setProcessing] = useState("");
-  const [disabled, setDisabled] = useState(true);
+  const [{ cart }, user /*, dispatch*/] = useStateValue();
+  const [succeeded /*setSucceeded*/] = useState(false);
+  const [processing /*setProcessing*/] = useState("");
+  const [disabled /*setDisabled*/] = useState(true);
 
   return (
     <div className="payment">
@@ -77,7 +77,7 @@ function Payment() {
                 </button>
               </div>
 
-            {/* {error && <div>{error}</div>} */}
+              {/* {error && <div>{error}</div>} */}
             </form>
           </div>
         </div>

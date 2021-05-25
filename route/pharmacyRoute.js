@@ -10,8 +10,8 @@ router
   .get(pharmacyController.getPharmacy)
   .delete(pharmacyController.deletePharmacy);
 
-router.route("/registerpharmacy").post(pharmacyAuthController.signup);
+router.route("/register").post(pharmacyAuthController.signup);
 
-router.route("/pharmacylogin").post(pharmacyAuthController.signin);
+router.route("/login").post(pharmacyAuthController.signin);
 
 module.exports = router;

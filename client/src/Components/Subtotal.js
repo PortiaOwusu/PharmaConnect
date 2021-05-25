@@ -1,13 +1,13 @@
 import React from "react";
 import "./Subtotal.css";
 import CurrencyFormat from "react-currency-format";
-import { useStateValue } from "./StateProvider";
-import { getCartTotal } from "./reducer";
+import { useStateValue } from "../context/StateProvider";
+import { getCartTotal } from "../reducer/reducer";
 import { useHistory } from "react-router";
 
 function Subtotal() {
   const history = useHistory();
-  const [{ cart }, dispatch] = useStateValue();
+  const [{ cart } /*dispatch*/] = useStateValue();
 
   return (
     <div className="subtotal">
@@ -29,7 +29,9 @@ function Subtotal() {
         prefix={"GH₵"}
       />
 
-      <button onClick={e => history.push('/payment')}>Preceed to Checkout</button>
+      <button onClick={(e) => history.push("/payment")}>
+        Preceed to Checkout
+      </button>
     </div>
   );
 }
